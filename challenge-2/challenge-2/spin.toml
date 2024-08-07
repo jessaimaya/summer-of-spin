@@ -1,0 +1,20 @@
+spin_manifest_version = 2
+
+[application]
+name = "challenge2"
+version = "0.1.0"
+authors = ["jessai <maya.jessai@gmail.com>"]
+description = ""
+
+[[trigger.http]]
+route = "/..."
+component = "challenge2"
+
+[component.challenge2]
+source = "target/wasm32-wasi/release/challenge2.wasm"
+allowed_outbound_hosts = ["http://127.0.0.1:3000"]
+ai_models = ["llama2-chat"]
+key_value_stores = ["default"]
+[component.challenge2.build]
+command = "cargo build --target wasm32-wasi --release"
+watch = ["src/**/*.rs", "Cargo.toml"]
